@@ -13,7 +13,6 @@
     </b-carousel>
   </div>
 </template>
-
 <script>
 import { BCarousel, BCarouselSlide } from 'bootstrap-vue'
 export default {
@@ -24,11 +23,7 @@ export default {
   },
   computed: {
     sliceIds() {
-      const theIDS = []
-      this.sliceData.data.body.forEach((slice) => {
-        theIDS.push(slice.items[0].slide.id)
-      })
-      return theIDS
+      return this.sliceData.data.body.map(slice => slice.items[0].slide.id, [])
     },
     slices() {
       return this.$store.getters['components/slicesByIds'](this.sliceIds)

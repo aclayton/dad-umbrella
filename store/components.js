@@ -3,16 +3,13 @@ import config from '../appConfig'
 import { processComponentSlices, prococessError } from '@/assets/js/vuexProcessors'
 
 const state = () => ({
-  all: [],
   slices: []
 })
 
 const mutations = {
-  UPDATE_COMPONENTS(state, payload) { state.all = payload },
   UPDATE_SLICES(state, payload) {
     console.log('committing update slices//components', payload)
-    // payload.forEach(x => state.slices.push(x))
-    state.slices = payload
+    payload.forEach(x => state.slices.push(x))
   }
 }
 
@@ -41,7 +38,6 @@ const actions = {
 }
 
 const getters = {
-  all: state => state.all,
   slices: state => state.slices,
   slicesByIds: state => ids => state.slices.filter(x => ids.includes(x.id))
 }

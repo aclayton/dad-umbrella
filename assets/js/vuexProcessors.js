@@ -15,6 +15,7 @@ const processPage = async function (page, state) {
 }
 
 const processPageSlices = async function (slices, state) {
+  console.log('the slices', slices.results[1].data.body[0].items)
   await slices.results.forEach((slice) => {
     slice.componentName = snakeToCamel(slice.type).replace(/^\w/, c => c.toUpperCase())
   })

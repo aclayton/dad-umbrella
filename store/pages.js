@@ -1,6 +1,6 @@
 import Prismic from 'prismic-javascript'
 import config from '../appConfig'
-import { processPages, processPage, processPageSlices, prococessError } from '@/assets/js/vuexProcessors'
+import { processPage, processPageSlices, prococessError } from '@/assets/js/vuexProcessors'
 
 const state = () => ({
   all: [],
@@ -21,16 +21,16 @@ const actions = {
     await Prismic.getApi(config.prismicEndpoint)
       .then(api => state.commit('UPDATE_API', api))
   },
-  async getPages(state) {
-    await Prismic.getApi(config.prismicEndpoint)
-      .then(
-        api => api.query(Prismic.Predicates.at('document.type', 'page'), { lang: '*' })
-      )
-      .then(
-        res => processPages(res, state),
-        err => prococessError(err, state)
-      )
-  },
+  // async getPages(state) {
+  //   await Prismic.getApi(config.prismicEndpoint)
+  //     .then(
+  //       api => api.query(Prismic.Predicates.at('document.type', 'page'), { lang: '*' })
+  //     )
+  //     .then(
+  //       res => processPages(res, state),
+  //       err => prococessError(err, state)
+  //     )
+  // },
   async getPage(state, uid) {
     await Prismic.getApi(config.prismicEndpoint)
       .then(
