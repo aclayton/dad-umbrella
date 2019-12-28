@@ -7,11 +7,12 @@ const processPages = async function (pages, state) {
     slice.id = slice.primary[slice.slice_type].id
   })
   await state.commit('UPDATE_PAGES', pages.results)
+  await console.log('pages', pages.results)
 }
 
 const processPage = async function (page, state) {
   await state.commit('UPDATE_CURRENT', page.results[0])
-  await state.dispatch('getSliceData', getSliceIds(page.results[0].data.body))
+  await state.dispatch('components/getSliceData', getSliceIds(page.results[0].data.body), { root: true })
 }
 
 const processPageSlices = async function (slices, state) {
@@ -62,5 +63,6 @@ export {
   processPage,
   processPageSlices,
   prococessError,
-  processComponentSlices
+  processComponentSlices,
+  getSliceIds
 }

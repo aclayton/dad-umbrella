@@ -1,7 +1,6 @@
 <template>
   <div>
     <div v-html="$prismic.asHtml($objectifyIt(sliceData.data).projector_title)" />
-    <pre>{{ sliceIds }}</pre>
     <b-carousel>
       <b-carousel-slide
         v-for="slice in slices"

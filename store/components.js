@@ -15,7 +15,7 @@ const mutations = {
 
 const actions = {
   async getSliceData(state, ids) {
-    console.log('getting component slice data', ids)
+    console.log('getting slice data', ids)
     await Prismic.getApi(config.prismicEndpoint)
       .then(
         api => api.query(Prismic.Predicates.in('document.id', ids), { lang: '*' })

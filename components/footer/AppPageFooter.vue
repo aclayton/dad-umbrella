@@ -1,7 +1,9 @@
 <template>
-  <b-container v-if="footerData" class="footer">
-    <h2>FOOTER</h2>
-  </b-container>
+  <footer>
+    <b-container v-if="footerData" class="footer">
+      <h2>FOOTER</h2>
+    </b-container>
+  </footer>
 </template>
 <script>
 import { BContainer } from 'bootstrap-vue'
