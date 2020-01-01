@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     pageTitle() {
-      return this.$store.getters['pages/current'].data.title
+      return this.$store.getters['pages/pageByUid'](this.$store.$router.currentRoute.params.index).data.title
     }
   }
 }

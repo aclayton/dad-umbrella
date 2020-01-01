@@ -15,8 +15,7 @@ export default {
   name: 'Index',
   components: { AppPageHeader, AppSlices, AppPageFooter, AppAlerts },
   async fetch({ store, params }) {
-    await store.dispatch('pages/getPage', params.index)
-    await store.dispatch('pages/getPages', params.index)
+    await store.dispatch('pages/getPages')
   }
 }
 </script>

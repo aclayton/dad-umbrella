@@ -1,8 +1,8 @@
 <template>
-    <div
-      :v-if="sliceData"
-      v-html="$prismic.asHtml(SubTitle)"
-    />
+  <div
+    :v-if="sliceData"
+    v-html="$prismic.asHtml(SubTitle)"
+  />
 </template>
 <script>
 export default {

@@ -8,14 +8,14 @@ const state = () => ({
 
 const mutations = {
   UPDATE_SLICES(state, payload) {
-    console.log('committing update slices//components', payload)
     payload.forEach(x => state.slices.push(x))
+    console.log('latest slices state:', state.slices)
   }
 }
 
 const actions = {
   async getSliceData(state, ids) {
-    console.log('getting slice data', ids)
+    console.log('getting slice data for ids =>', ids)
     await Prismic.getApi(config.prismicEndpoint)
       .then(
         api => api.query(Prismic.Predicates.in('document.id', ids), { lang: '*' })
@@ -25,16 +25,6 @@ const actions = {
         err => prococessError(err, state)
       )
   }
-  // ,
-  // async nuxtServerInit({ commit }) {
-  //   if (process.env.VUE_ENV === 'server') {
-  //     const recursive = require('recursive-readdir')
-  //     await recursive('components/slices', ['.DS_Store'], function (err, files) {
-  //       if (err) console.log(err)
-  //       else commit('UPDATE_COMPONENTS', files)
-  //     })
-  //   }
-  // }
 }
 
 const getters = {

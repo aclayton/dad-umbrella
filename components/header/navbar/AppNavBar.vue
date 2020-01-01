@@ -13,7 +13,7 @@
               :key="navItem.link"
               :to="navItem.link"
             >
-              {{navItem.title}}
+              {{ navItem.title }}
             </b-nav-item>
           </b-navbar-nav>
         </b-collapse>

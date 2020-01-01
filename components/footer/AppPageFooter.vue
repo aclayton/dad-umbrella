@@ -12,7 +12,7 @@ export default {
   components: { BContainer },
   computed: {
     footerData() {
-      return this.$store.getters['pages/current']
+      return this.$store.getters['pages/pageByUid'](this.$store.$router.currentRoute.params.index)
     }
   }
 }

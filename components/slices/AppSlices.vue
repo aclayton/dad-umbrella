@@ -1,12 +1,13 @@
 <template>
   <div id="components" role="main">
-      <component
-        v-for="slice in slices"
-        :key="slice.id"
-        :class="slice.type + ' ' + slice.id"
-        :is="slice.componentName"
-        :slice-data="slice"
-      />
+    <component
+      :is="slice.componentName"
+      v-for="slice in slices"
+      :key="slice.id"
+      :v-if="slice.parentType === 'page'"
+      :class="`${slice.type} ${slice.id}`"
+      :slice-data="slice"
+    />
   </div>
 </template>
 <script>
