@@ -12,11 +12,10 @@
 </template>
 <script>
 import SubTitle from '@/components/slices/subtitle/AppSubTitle.vue'
-import TextArea from '@/components/slices/textarea/AppTextArea.vue'
-import Projector from '@/components/slices/slideshow/Projector.vue'
+import Carousel from '@/components/slices/slideshow/Carousel.vue'
 export default {
   name: 'Slices',
-  components: { SubTitle, TextArea, Projector },
+  components: { SubTitle, Carousel },
   computed: {
     slices() {
       return this.$store.getters['components/slices']

@@ -15,7 +15,7 @@
 <script>
 import { BCarousel, BCarouselSlide } from 'bootstrap-vue'
 export default {
-  name: 'AppPropjector',
+  name: 'Carousel',
   components: { BCarousel, BCarouselSlide },
   props: {
     sliceData: { type: Object, default: () => {} }
@@ -23,15 +23,16 @@ export default {
   computed: {
     sliceIds() {
       const componentSliceIds = []
-      this.sliceData.data.body[0].items.forEach(x => componentSliceIds.push(x.slide.id))
-      console.log('componentSliceIds', componentSliceIds)
+      this.sliceData.data.body[0].items.forEach((x) => {
+        componentSliceIds.push(x.carousel_slide.id)
+      })
       return componentSliceIds
     },
     slices() {
       return this.$store.getters['components/slicesByIds'](this.sliceIds)
     },
     title() {
-      return this.sliceData.data.projector_title
+      return this.sliceData.data.carousel_title
     }
   }
 }

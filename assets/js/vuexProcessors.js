@@ -2,24 +2,37 @@
 // PAGE PROCESSORS
 // *****************************************
 const processPages = async function (pages, state) {
-  const sliceIds = []
-  await pages.results[0].data.body.forEach((slice) => {
-    slice.componentName = snakeToCamel(slice.slice_type).replace(/^\w/, c => c.toUpperCase())
-    slice.id = slice.primary[slice.slice_type].id
-    sliceIds.push(slice.id)
+  const rootSliceIds = []
+  pages.results.forEach((page) => {
+    if (page.data.body.length > 0) {
+      page.data.body.forEach((slice) => {
+        if (slice.primary[slice.slice_type]) {
+          rootSliceIds.push(slice.primary[slice.slice_type].id)
+        }
+      })
+    }
   })
-  await state.dispatch('components/getSliceData', sliceIds, { root: true })
+  await state.dispatch('components/getSliceData', rootSliceIds, { root: true })
   await state.commit('UPDATE_PAGES', pages.results)
 }
 
 // *****************************************
 //  COMPONENT PROCESSORS
 // *****************************************
-const processComponentSlices = async function (slices, state) {
-  await slices.results.forEach((slice, i) => {
+const processComponentSlices = function (slices, state) {
+  slices.results.forEach((slice, i) => {
+    if (slice.data.body) {
+      slice.data.body[0].items.forEach((x) => {
+        state.dispatch(
+          'components/getSliceData',
+          [x[slice.data.body[0].slice_type].id],
+          { root: true }
+        )
+      })
+    }
     slice.componentName = snakeToCamel(slice.type).replace(/^\w/, c => c.toUpperCase())
   })
-  await state.commit('UPDATE_SLICES', slices.results)
+  state.commit('UPDATE_SLICES', slices.results)
 }
 
 // *****************************************
