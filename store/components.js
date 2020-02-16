@@ -9,7 +9,6 @@ const state = () => ({
 const mutations = {
   UPDATE_SLICES(state, payload) {
     payload.forEach(x => state.slices.push(x))
-    console.log('latest slices state:', state.slices)
   }
 }
 

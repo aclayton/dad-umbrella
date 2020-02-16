@@ -1,5 +1,10 @@
 import appConfig from './appConfig'
 export default {
+  vue: {
+    config: {
+      devtools: true
+    }
+  },
   mode: 'universal',
   /*
   ** Headers of the page

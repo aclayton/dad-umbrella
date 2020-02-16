@@ -19,20 +19,20 @@ const processPages = async function (pages, state) {
 // *****************************************
 //  COMPONENT PROCESSORS
 // *****************************************
-const processComponentSlices = function (slices, state) {
-  slices.results.forEach((slice, i) => {
+const processComponentSlices = async function (slices, state) {
+  const moreSlices = []
+  slices.results.forEach(async (slice, i) => {
     if (slice.data.body) {
-      slice.data.body[0].items.forEach((x) => {
-        state.dispatch(
-          'components/getSliceData',
-          [x[slice.data.body[0].slice_type].id],
-          { root: true }
-        )
+      await slice.data.body[0].items.forEach((x) => {
+        moreSlices.push(x[slice.data.body[0].slice_type].id)
       })
     }
     slice.componentName = snakeToCamel(slice.type).replace(/^\w/, c => c.toUpperCase())
   })
-  state.commit('UPDATE_SLICES', slices.results)
+  await state.commit('UPDATE_SLICES', slices.results)
+  if (moreSlices.length > 0) {
+    await state.dispatch('components/getSliceData', moreSlices, { root: true })
+  }
 }
 
 // *****************************************
